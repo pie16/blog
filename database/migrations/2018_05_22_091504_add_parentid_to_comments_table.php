@@ -13,7 +13,7 @@ class AddParentidToCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('comment', function (Blueprint $table) {
+        Schema::table('comments', function (Blueprint $table) {
             $table->integer('parent_id')->default(0);
         });
     }
@@ -25,7 +25,7 @@ class AddParentidToCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('comment', function (Blueprint $table) {
+        Schema::table('comments', function (Blueprint $table) {
             $table->dropColumn('parent_id');
         });
     }

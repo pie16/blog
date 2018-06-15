@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+
 use App\Post;
 use App\Services\CommentService;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 class BlogController extends Controller
 {
@@ -18,7 +15,8 @@ class BlogController extends Controller
     }
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(5);
+        //dd($posts);
         return view('blog.index', compact('posts'));
     }
 
@@ -27,6 +25,7 @@ class BlogController extends Controller
         $post = Post::whereSlug($slug)->with('comments', 'comments.user')->firstOrFail();
         //dd($post);
         $comments = $this->commentService->buildCommentTree($post->comments->keyBy('id'));
+
 
         return view('blog.show', compact('post', 'comments'));
     }

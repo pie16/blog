@@ -21,5 +21,12 @@
                 </div>
             @endforeach
         @endif
+            <div class="container">
+                @foreach ($posts as $post)
+                    {{ $post->name }}
+                @endforeach
+            </div>
+
+            {{ $posts->links() }}
     </div>
 @endsection
