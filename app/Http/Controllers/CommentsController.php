@@ -14,6 +14,7 @@ class CommentsController extends Controller
 
         $id = $request->input('post_id');
         $pid = $request->input('comment_id');
+        session()->put('url.intended', url()->previous());
 
         return view('blog.comments.create', compact('id', 'pid'));
     }
@@ -27,6 +28,7 @@ class CommentsController extends Controller
             'user_id' => Auth::id(),
         ]);
         $comment->save();
-        return redirect('blog')->with('status', 'Your comment has been created!');
+        //dd(session());
+        return redirect()->intended()->with('status', 'Your comment has been created!');
     }
 }

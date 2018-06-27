@@ -51,7 +51,7 @@ class LoginController extends Controller
     {
         if(!session()->has('url.intended'))
         {
-            session(['url.intended' => url()->previous()]);
+            session()->put('url.intended', url()->previous());
 
             //dd(session('url.intended'));
         }
